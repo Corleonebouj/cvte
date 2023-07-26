@@ -33,9 +33,9 @@ int main(void)
     printf("Read rtc time %s\n",ret ? "error":"ok");
     printf("Current rtc date/time is %d-%d-%d-%d,%02d:%02d:%02d.\n",my_rtc.tm_year + 1900, my_rtc.tm_mon + 1, my_rtc.tm_mday, my_rtc.tm_wday, my_rtc.tm_hour, my_rtc.tm_min, my_rtc.tm_sec);
     
-    my_alarm.time.tm_hour = 13;
-    my_alarm.time.tm_min = 50;
-    my_alarm.time.tm_sec = 20;
+    my_alarm.time.tm_hour = my_rtc.tm_hour;
+    my_alarm.time.tm_min = my_rtc.tm_min + 1;
+    my_alarm.time.tm_sec = my_rtc.tm_sec;
     
     //Rtc set and read alarm
     ret = ioctl(fd, RTC_ALM_SET, &my_alarm.time);
